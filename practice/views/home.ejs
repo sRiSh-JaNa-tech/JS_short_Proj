@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- Google Fonts for modern typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <h1><i class="fa-solid fa-calendar-check"></i> Daily Scheduler</h1>
+            <p class="subtitle">Stay organized, stay productive</p>
+            <input type="hidden" id="userId" value="<%= userId %>">
+        </header>
+
+        <main class="main-content">
+            <!-- Add Task Form -->
+            <section class="add-task-section glass-panel">
+                <h2>Create New Task</h2>
+                <form id="addTaskForm" class="task-form">
+                    <div class="form-group">
+                        <label for="taskTitle">Title</label>
+                        <input type="text" id="taskTitle" name="title" required placeholder="What needs to be done?">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group half-width">
+                            <label for="taskPriority">Priority</label>
+                            <select id="taskPriority" name="priority">
+                                <option value="low">Low</option>
+                                <option value="medium" selected>Medium</option>
+                                <option value="high">High</option>
+                            </select>
+                        </div>
+                        <div class="form-group half-width">
+                            <label for="taskDueDate">Due Date</label>
+                            <input type="date" id="taskDueDate" name="dueDate">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="taskDesc">Description (Optional)</label>
+                        <textarea id="taskDesc" name="description" rows="2" placeholder="Add some details..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">
+                        <i class="fa-solid fa-plus"></i> Add Task
+                    </button>
+                    <!-- Loading indicator for adding a task -->
+                    <div id="addLoading" class="loader hidden"></div>
+                </form>
+            </section>
+
+            <!-- Task List -->
+            <section class="task-list-section glass-panel">
+                <div class="list-header">
+                    <h2>Your Tasks</h2>
+                    <div class="filter-group">
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="pending">Pending</button>
+                        <button class="filter-btn" data-filter="completed">Completed</button>
+                    </div>
+                </div>
+                
+                <!-- Loading indicator for fetching tasks -->
+                <div id="tasksLoading" class="loader">Loading tasks...</div>
+                
+                <ul id="taskList" class="task-list">
+                    <!-- Tasks will be dynamically injected here by JS -->
+                </ul>
+                
+                <!-- Empty state -->
+                <div id="emptyState" class="empty-state hidden">
+                    <img src="https://cdni.iconscout.com/illustration/premium/thumb/folder-is-empty-4064360-3363921.png" alt="No tasks" width="150">
+                    <p>No tasks found. Create one above to get started!</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Template for a single task item (hidden, used by JS) -->
+    <template id="taskTemplate">
+        <li class="task-item">
+            <div class="task-content">
+                <div class="task-header">
+                    <label class="custom-checkbox">
+                        <input type="checkbox" class="task-checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                    <h3 class="task-title"></h3>
+                    <span class="priority-badge"></span>
+                </div>
+                <p class="task-desc"></p>
+                <div class="task-meta">
+                    <span class="due-date"><i class="fa-regular fa-calendar"></i> <span class="date-text"></span></span>
+                </div>
+            </div>
+            <div class="task-actions">
+                <button class="btn-icon delete-btn" title="Delete Task">
+                    <i class="fa-solid fa-trash-can"></i>
+                </button>
+            </div>
+        </li>
+    </template>
+
+    <script src="/js/script.js"></script>
+</body>
+</html>
