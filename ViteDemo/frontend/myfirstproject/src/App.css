@@ -1,0 +1,28 @@
+.container {
+  display: flex;                 /* ✅ FIXED */
+  background-color: bisque;
+
+  flex-direction: column;        /* stack vertically */
+
+  justify-content: center;       /* vertical centering */
+  align-items: center;           /* horizontal centering */
+
+  min-height: 100vh;             /* full screen height */
+}
+
+.button-container {
+  display: flex;
+  gap : 20px;
+  padding-top: 10px;
+  justify-content: center; /* Centers vertically */
+  align-items: center;     /* Centers horizontally */
+}
+
+.button-prop {
+  background-color: gainsboro;
+  color : black;
+  width : 80px;
+  height : 30px;
+  border: none;
+  border-radius: 5px;
+}
